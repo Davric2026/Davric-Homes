@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/* Brand tokens — values measured from the company profile deck. Confirm with the client before launch (SKILL.md §1). */
+@theme {
+  --color-maroon: #65212a;
+  --color-maroon-deep: #451720;
+  --color-red: #b2101f;
+  --color-red-soft: #e5525e; /* red accent for small text on dark bands, where #b2101f fails contrast */
+  --color-ink: #181818;
+  --color-ink-deep: #240f0f;
+  --color-paper: #fbfaf9;
+  --color-panel: #f7f5f3;
+  --color-line: #e6e0dc;
+  --color-gold: #c9a24b;
+  --color-body: #424242;
+  --color-muted: #6b6b6b;
+
+  --radius-brand: 3px;
+  --shadow-card: 0 24px 60px -34px rgb(24 24 24 / 0.4);
+
+  --animate-rise: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@theme inline {
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-lato), system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 7.5rem;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-body);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background: var(--color-maroon);
+  color: #fff;
+}
+
+@utility container-x {
+  width: 100%;
+  max-width: 78rem;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+@utility eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* The red-lattice facade of Dav Ric Towers, as a texture. Colour comes from `text-*`. */
+@utility lattice {
+  background-image:
+    repeating-linear-gradient(62deg, currentColor 0 2px, transparent 2px 38px),
+    repeating-linear-gradient(-62deg, currentColor 0 2px, transparent 2px 38px);
+}
+
+/* The deck's steep diagonal panel split. */
+@utility cut-left {
+  clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
